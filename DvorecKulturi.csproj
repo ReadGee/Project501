@@ -60,8 +60,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MainMenuCommand.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
