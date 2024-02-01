@@ -13,7 +13,7 @@ namespace DvorecKulturi.Properties {
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.8.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -26,8 +26,8 @@ namespace DvorecKulturi.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\bin\\Debug\\Mai" +
-            "nDatabase.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\MainDatabase." +
+            "mdf;Integrated Security=True;Connect Timeout=30")]
         public string MainDatabaseConnectionString {
             get {
                 return ((string)(this["MainDatabaseConnectionString"]));
@@ -38,10 +38,10 @@ namespace DvorecKulturi.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\MainDatabase." +
-            "mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True")]
-        public string MainDatabase {
+            "mdf;Integrated Security=True;Connect Timeout=30;")]
+        public string MainDatabaseConnectionString1 {
             get {
-                return ((string)(this["MainDatabase"]));
+                return ((string)(this["MainDatabaseConnectionString1"]));
             }
         }
     }

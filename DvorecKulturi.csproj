@@ -72,6 +72,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MainDatabaseDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MainDatabaseDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MainDatabaseDataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,8 +113,19 @@
     <None Include="MainDatabaseDataSet.xss">
       <DependentUpon>MainDatabaseDataSet.xsd</DependentUpon>
     </None>
+    <None Include="MainDatabaseDataSet1.xsc">
+      <DependentUpon>MainDatabaseDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="MainDatabaseDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>MainDatabaseDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="MainDatabaseDataSet1.xss">
+      <DependentUpon>MainDatabaseDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <Compile Include="Properties\Settings.Designer.cs">
@@ -120,12 +136,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="MainDatabase.mdf" />
-    <Content Include="MainDatabase_log.ldf">
-      <DependentUpon>MainDatabase.mdf</DependentUpon>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">

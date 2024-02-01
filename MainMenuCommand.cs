@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static DvorecKulturi.MainMenuCommand.Set;
 
 namespace DvorecKulturi
 {
@@ -17,12 +18,18 @@ namespace DvorecKulturi
 
         static int idFromUserTicketsDataGrid;
 
+        static int idFromAdminTicketDataGrid;
+
         #endregion
         public static class Get
         {
             public static class V_Events
             {
                 
+            }
+            public static int IdFromAdminTicketDataGrid()
+            {
+                return idFromAdminTicketDataGrid;
             }
             public static int IdFromUserEventDataGrid()
             {
@@ -110,9 +117,95 @@ namespace DvorecKulturi
                 }
                 
             }
-            public static class V_Events
+            public static class Tickets
             {
-                
+                public static void UpdateData(string id_Events, string id_PlaceType, string cost, bool sale)
+                {
+                    using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                    {
+                        connection.Open();
+
+                        // SQL-запрос на обновление данных в таблице Tickets
+                        string updateQuery = "UPDATE [dbo].[Tickets] SET id_Event = @id_Event, id_PlaceType = @id_PlaceType, Cost = @Cost, Sales = @Sales WHERE Id = @TicketId";
+                        SqlCommand updateCommand = new SqlCommand(updateQuery, connection);
+
+                        
+                        updateCommand.Parameters.AddWithValue("@id_Event", Convert.ToInt32(id_Events));
+                        updateCommand.Parameters.AddWithValue("@id_PlaceType", Convert.ToInt32(id_PlaceType));
+                        updateCommand.Parameters.AddWithValue("@Cost", Convert.ToDecimal(cost));
+                        updateCommand.Parameters.AddWithValue("@Sales", sale);
+                        updateCommand.Parameters.AddWithValue("@TicketId", idFromAdminTicketDataGrid);
+
+                        // Выполнение запроса
+                        updateCommand.ExecuteNonQuery();
+                    }
+                }
+                public static void DeleteFromId(string id)
+                {
+                    using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                    {
+                        connection.Open();
+
+                        // Запрос на удаление записи по Id
+                        string deleteQuery = "DELETE FROM [dbo].[Tickets] WHERE Id = @TicketId";
+                        SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+                        deleteCommand.Parameters.AddWithValue("@TicketId", id);
+
+                        // Выполнение запроса
+                        deleteCommand.ExecuteNonQuery();
+                    }
+                }
+                public static void DeleteFromId()
+                {
+                    using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                    {
+                        connection.Open();
+
+                        // Запрос на удаление записи по Id
+                        string deleteQuery = "DELETE FROM [dbo].[Tickets] WHERE Id = @TicketId";
+                        SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+                        deleteCommand.Parameters.AddWithValue("@TicketId", idFromAdminTicketDataGrid);
+
+                        // Выполнение запроса
+                        deleteCommand.ExecuteNonQuery();
+                    }
+                }
+                public static void CreateNew(string id_Events, string id_PlaceType, string cost, bool sale)
+                {
+                    using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                    {
+                        connection.Open();
+                        // Определение нового ID
+                        string getIdQuery = "SELECT ISNULL(MAX(Id), 0) + 1 FROM [dbo].[Tickets]";
+                        SqlCommand getIdCommand = new SqlCommand(getIdQuery, connection);
+                        int newId = Convert.ToInt32(getIdCommand.ExecuteScalar());
+
+                        string insertQuery = "INSERT INTO [dbo].[Tickets] (Id, id_Event, id_PlaceType, Cost, Sales) VALUES (@Id, @id_Event, @id_PlaceType, @Cost, @Sales)";
+                        SqlCommand insertCommand = new SqlCommand(insertQuery, connection);
+
+                        
+                        insertCommand.Parameters.AddWithValue("@Id", newId);
+                        insertCommand.Parameters.AddWithValue("@id_Event", Convert.ToInt32(id_Events));
+                        insertCommand.Parameters.AddWithValue("@id_PlaceType", Convert.ToInt32(id_PlaceType));
+                        insertCommand.Parameters.AddWithValue("@Cost", Convert.ToDecimal(cost));
+                        insertCommand.Parameters.AddWithValue("@Sales", sale);
+
+                        // Выполнение запроса
+                        insertCommand.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            public static void AddNewidFromAdminTicketDataGrid(string id)
+            {
+                try
+                {
+                    idFromAdminTicketDataGrid = int.Parse(id);
+                }
+                catch
+                {
+                    MessageBox.Show("Ошибка преобразования в int", "КРИТИЧЕСКАЯ ОШИБКА", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
 
             public static void AddNewidFromUserEventDataGrid(string id)
