@@ -92,6 +92,22 @@ namespace DvorecKulturi
 
                 }
 
+                public static void DeleteFromId(string id)
+                {
+                    using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                    {
+                        connection.Open();
+
+                        // Запрос на удаление записи по Id
+                        string deleteQuery = "DELETE FROM [dbo].[PurchaseRequests] WHERE Id = @Id";
+                        SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection);
+                        deleteCommand.Parameters.AddWithValue("@Id", Convert.ToInt32(id));
+
+                        // Выполнение запроса
+                        deleteCommand.ExecuteNonQuery();
+
+                    }
+                }
                 
             }
             public static class V_Events

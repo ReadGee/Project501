@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,23 +76,29 @@ namespace DvorecKulturi
 
         private void BuyOnEvent_btn_Click(object sender, EventArgs e)
         {
-            int rowIndex = UserEvent_dataGrid.SelectedCells[0].RowIndex;
-            DataGridViewCell selectedCell = UserEvent_dataGrid.Rows[rowIndex].Cells[0];
-            if (selectedCell.Value.ToString() != null)
+            try
             {
-                MainMenuCommand.Set.AddNewidFromUserEventDataGrid(selectedCell.Value.ToString());
-                if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+                int rowIndex = UserEvent_dataGrid.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = UserEvent_dataGrid.Rows[rowIndex].Cells[0];
+                if (selectedCell.Value.ToString() != null)
                 {
-                    tabControl1.SelectTab(tabPage2);
-                    LoadDataByEventId();
+                    MainMenuCommand.Set.AddNewidFromUserEventDataGrid(selectedCell.Value.ToString());
+                    if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+                    {
+                        tabControl1.SelectTab(tabPage2);
+                        LoadDataByEventId();
 
-                }                
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Мероприятие не выбрано.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch
             {
                 MessageBox.Show("Мероприятие не выбрано.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-
         }
 
         #endregion
@@ -119,19 +126,28 @@ namespace DvorecKulturi
         }
         private void BuyTickets_btn_Click(object sender, EventArgs e)
         {
-            int rowIndex = UserTickets_datagrid.SelectedCells[0].RowIndex;
-            DataGridViewCell selectedCell = UserTickets_datagrid.Rows[rowIndex].Cells[0];
-
-            if (selectedCell.Value.ToString() != null)
+            try
             {
-                MainMenuCommand.Set.AddNewIdFromUserTicketsDataGrid(selectedCell.Value.ToString());
-                if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+
+
+                int rowIndex = UserTickets_datagrid.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = UserTickets_datagrid.Rows[rowIndex].Cells[0];
+
+                if (selectedCell.Value.ToString() != null)
                 {
-                    MainMenuCommand.Set.PurchaseRequests.AddNewRequests(Phone_textbox.Text, FioOnNew_textbox.Text);
-                    tabControl1.SelectTab(tabPage3);
-                }                
+                    MainMenuCommand.Set.AddNewIdFromUserTicketsDataGrid(selectedCell.Value.ToString());
+                    if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+                    {
+                        MainMenuCommand.Set.PurchaseRequests.AddNewRequests(Phone_textbox.Text, FioOnNew_textbox.Text);
+                        tabControl1.SelectTab(tabPage3);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Билет не выбран.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
-            else
+            catch
             {
                 MessageBox.Show("Билет не выбран.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
@@ -148,7 +164,8 @@ namespace DvorecKulturi
 
         private void SingIn_btn_Click(object sender, EventArgs e)
         {
-
+            AdminForm adminForm = new AdminForm();
+            adminForm.Show();
         }
     }
 }
