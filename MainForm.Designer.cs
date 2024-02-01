@@ -46,6 +46,9 @@
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.label4 = new System.Windows.Forms.Label();
             this.LogoText = new System.Windows.Forms.Label();
+            this.SingIn_btn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserEvent_dataGrid)).BeginInit();
@@ -56,15 +59,19 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Appearance = System.Windows.Forms.TabAppearance.FlatButtons;
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.Disable;
+            this.tabControl1.ItemSize = new System.Drawing.Size(10, 10);
             this.tabControl1.Location = new System.Drawing.Point(12, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1097, 594);
+            this.tabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tabControl1.TabIndex = 0;
+            this.tabControl1.TabStop = false;
             // 
             // tabPage1
             // 
@@ -73,13 +80,12 @@
             this.tabPage1.Controls.Add(this.Search_btn);
             this.tabPage1.Controls.Add(this.Search_textbox);
             this.tabPage1.Controls.Add(this.UserEvent_dataGrid);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 14);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1089, 568);
+            this.tabPage1.Size = new System.Drawing.Size(1089, 576);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // BuyOnEvent_btn
             // 
@@ -135,6 +141,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button3);
             this.tabPage2.Controls.Add(this.BuyTickets_btn);
             this.tabPage2.Controls.Add(this.LabelForSumma_text);
             this.tabPage2.Controls.Add(this.Phone_textbox);
@@ -142,10 +149,10 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.FioOnNew_textbox);
             this.tabPage2.Controls.Add(this.UserTickets_datagrid);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 14);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1089, 568);
+            this.tabPage2.Size = new System.Drawing.Size(1089, 576);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -159,6 +166,7 @@
             this.BuyTickets_btn.TabIndex = 7;
             this.BuyTickets_btn.Text = "Оплатить";
             this.BuyTickets_btn.UseVisualStyleBackColor = true;
+            this.BuyTickets_btn.Click += new System.EventHandler(this.BuyTickets_btn_Click);
             // 
             // LabelForSumma_text
             // 
@@ -207,20 +215,21 @@
             // 
             this.UserTickets_datagrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.UserTickets_datagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.UserTickets_datagrid.Location = new System.Drawing.Point(6, 6);
+            this.UserTickets_datagrid.Location = new System.Drawing.Point(6, 32);
             this.UserTickets_datagrid.Name = "UserTickets_datagrid";
             this.UserTickets_datagrid.ReadOnly = true;
             this.UserTickets_datagrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.UserTickets_datagrid.Size = new System.Drawing.Size(742, 556);
+            this.UserTickets_datagrid.Size = new System.Drawing.Size(742, 530);
             this.UserTickets_datagrid.TabIndex = 0;
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.button2);
             this.tabPage3.Controls.Add(this.label4);
-            this.tabPage3.Location = new System.Drawing.Point(4, 22);
+            this.tabPage3.Location = new System.Drawing.Point(4, 14);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(1089, 568);
+            this.tabPage3.Size = new System.Drawing.Size(1089, 576);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -246,11 +255,44 @@
             this.LogoText.TabIndex = 1;
             this.LogoText.Text = "ДК \"Химиков\"";
             // 
+            // SingIn_btn
+            // 
+            this.SingIn_btn.Location = new System.Drawing.Point(1030, 17);
+            this.SingIn_btn.Name = "SingIn_btn";
+            this.SingIn_btn.Size = new System.Drawing.Size(75, 23);
+            this.SingIn_btn.TabIndex = 2;
+            this.SingIn_btn.Text = "Вход";
+            this.SingIn_btn.UseVisualStyleBackColor = true;
+            this.SingIn_btn.Click += new System.EventHandler(this.SingIn_btn_Click);
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(6, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Назад";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.label3_Click);
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Location = new System.Drawing.Point(6, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Назад";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.label3_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1121, 647);
+            this.Controls.Add(this.SingIn_btn);
             this.Controls.Add(this.LogoText);
             this.Controls.Add(this.tabControl1);
             this.Name = "MainForm";
@@ -289,6 +331,9 @@
         private System.Windows.Forms.Label LabelForSumma_text;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button SingIn_btn;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }
 

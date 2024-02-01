@@ -44,16 +44,6 @@ namespace DvorecKulturi
                     }
                 }
             }
-
-            /*int totalWidth = UserEvent_dataGrid.Width;
-
-            UserEvent_dataGrid.Columns["№"].Width = totalWidth / 12;
-            UserEvent_dataGrid.Columns["Зал"].Width = totalWidth / 5;
-            UserEvent_dataGrid.Columns["Название мероприятия"].Width = totalWidth / 4;
-            UserEvent_dataGrid.Columns["Дата"].Width = totalWidth / 6;
-            UserEvent_dataGrid.Columns["Время"].Width = totalWidth / 8;
-            UserEvent_dataGrid.Columns["Стоимость"].Width = totalWidth / 7;*/
-
         }
 
         private void Search_btn_event(object sender, EventArgs e)
@@ -87,17 +77,21 @@ namespace DvorecKulturi
         {
             int rowIndex = UserEvent_dataGrid.SelectedCells[0].RowIndex;
             DataGridViewCell selectedCell = UserEvent_dataGrid.Rows[rowIndex].Cells[0];
-            object cellValue = selectedCell.Value;
-            MainMenuCommand.Set.V_Events.AddNewId(cellValue.ToString());
-            if (MainMenuCommand.Get.V_Events.CheckNewId())
+            if (selectedCell.Value.ToString() != null)
             {
-                tabControl1.SelectTab(tabPage2);
-                LoadDataByEventId();
+                MainMenuCommand.Set.AddNewidFromUserEventDataGrid(selectedCell.Value.ToString());
+                if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+                {
+                    tabControl1.SelectTab(tabPage2);
+                    LoadDataByEventId();
+
+                }                
             }
             else
             {
                 MessageBox.Show("Мероприятие не выбрано.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+
         }
 
         #endregion
@@ -109,7 +103,7 @@ namespace DvorecKulturi
             using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
             {
                 connection.Open();
-                string query = $"SELECT * FROM V_Tickets WHERE id_Event = {MainMenuCommand.Get.V_Events.Newid()} AND Sales = 0";                
+                string query = $"SELECT * FROM V_Tickets WHERE id_Event = {MainMenuCommand.Get.IdFromUserEventDataGrid()} AND Sales = 0";                
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                 {
@@ -123,10 +117,38 @@ namespace DvorecKulturi
             UserTickets_datagrid.Columns["id_Event"].Visible = false;
             UserTickets_datagrid.Columns["Sales"].Visible = false;
         }
+        private void BuyTickets_btn_Click(object sender, EventArgs e)
+        {
+            int rowIndex = UserTickets_datagrid.SelectedCells[0].RowIndex;
+            DataGridViewCell selectedCell = UserTickets_datagrid.Rows[rowIndex].Cells[0];
+
+            if (selectedCell.Value.ToString() != null)
+            {
+                MainMenuCommand.Set.AddNewIdFromUserTicketsDataGrid(selectedCell.Value.ToString());
+                if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
+                {
+                    MainMenuCommand.Set.PurchaseRequests.AddNewRequests(Phone_textbox.Text, FioOnNew_textbox.Text);
+                    tabControl1.SelectTab(tabPage3);
+                }                
+            }
+            else
+            {
+                MessageBox.Show("Билет не выбран.\nПопробуйте снова выбрать в окне", "Внимание", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
 
 
         #endregion
 
-        
+        private void label3_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(tabPage1);
+        }
+
+        private void SingIn_btn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
