@@ -83,8 +83,8 @@ namespace DvorecKulturi
                 if (selectedCell.Value.ToString() != null)
                 {
                     MainMenuCommand.Set.AddNewidFromUserEventDataGrid(selectedCell.Value.ToString());
-                    tabControl1.SelectTab(tabPage2);
                     LoadDataByEventId();
+                    tabControl1.SelectTab(tabPage2);
                 }
                 else
                 {
@@ -106,7 +106,7 @@ namespace DvorecKulturi
             using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
             {
                 connection.Open();
-                string query = $"SELECT * FROM V_Tickets WHERE id_Event = {MainMenuCommand.Get.IdFromUserEventDataGrid()} AND Sales = 0";                
+                string query = $"SELECT * FROM V_Tickets WHERE id_Event = {MainMenuCommand.Get.IdFromUserEventDataGrid()} AND Продано = 0";                
 
                 using (SqlDataAdapter adapter = new SqlDataAdapter(query, connection))
                 {
@@ -118,7 +118,7 @@ namespace DvorecKulturi
             
             UserTickets_datagrid.CurrentCell = null;
             UserTickets_datagrid.Columns["id_Event"].Visible = false;
-            UserTickets_datagrid.Columns["Sales"].Visible = false;
+            /*UserTickets_datagrid.Columns["Sales"].Visible = false;*/
         }
         private void BuyTickets_btn_Click(object sender, EventArgs e)
         {
