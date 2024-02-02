@@ -160,8 +160,21 @@ namespace DvorecKulturi
 
         private void SingIn_btn_Click(object sender, EventArgs e)
         {
-            AdminForm adminForm = new AdminForm();
-            adminForm.Show();
+            FormSingIn formSingIn = new FormSingIn();
+            DialogResult result = formSingIn.ShowDialog();
+
+            if (result == DialogResult.Yes)
+            {
+                this.Hide();
+            }
+            else if (result == DialogResult.No)
+            {
+                // Действия при отмене
+            }
+
+
+            /*AdminForm adminForm = new AdminForm();
+            adminForm.Show();*/
         }
     }
 }
