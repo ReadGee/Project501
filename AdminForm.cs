@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OfficeOpenXml;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,8 +33,18 @@ namespace DvorecKulturi
           
             UpdateDataGrid1();
             UpdateDataGrid2();
+            UpdateDataGrid3();
+            UpdateDataGrid4();
+            UpdateDataGrid5();
 
         }
+        private void AdminForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+
+        #region UpdateDataGrid's
         private void UpdateDataGrid1()
         {
             using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
@@ -69,6 +80,60 @@ namespace DvorecKulturi
                 }
             }
         }
+        private void UpdateDataGrid3()
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+            {
+                connection.Open();
+                string sqlQuery = "SELECT * FROM V_Events";
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView3.DataSource = dataTable;
+                    }
+                }
+            }
+        }
+        private void UpdateDataGrid4()
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+            {
+                connection.Open();
+                string sqlQuery = "SELECT Id as '№', Name as 'Название места', NumberOfSeats as 'Количество мест', Description as 'Описание' FROM PlaceType";
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView4.DataSource = dataTable;
+                    }
+                }
+            }
+        }
+
+        private void UpdateDataGrid5()
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+            {
+                connection.Open();
+                string sqlQuery = "SELECT Id as '№', Name as 'Название зала', Description as 'Описание' FROM Hall";
+                using (SqlCommand command = new SqlCommand(sqlQuery, connection))
+                {
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView5.DataSource = dataTable;
+                    }
+                }
+            }
+        }
+        #endregion
+
 
         #region Page-1
         private void button1_Click(object sender, EventArgs e)
@@ -96,7 +161,7 @@ namespace DvorecKulturi
         #endregion
 
 
-        
+        #region Page-2
         private void button2_Click(object sender, EventArgs e)
         {
             MainMenuCommand.Set.Tickets.DeleteFromId();
@@ -138,6 +203,182 @@ namespace DvorecKulturi
                 textBox2.Text = null; // Очистить текстовое поле, если введены буквы                
             }
             checkOnAlfabet = false;
+        }
+
+        #endregion
+
+
+        #region Page-3
+        private void button7_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Events.DeleteFromId();
+            UpdateDataGrid3();
+        }
+
+        private void dataGridView3_SelectionChanged(object sender, EventArgs e)
+        {
+            
+            if (dataGridView3.SelectedCells.Count > 0)
+            {
+                int rowIndex = dataGridView3.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = dataGridView3.Rows[rowIndex].Cells[0];
+
+                // Проверяем, что значение ячейки не равно null
+                if (selectedCell.Value != null)
+                {
+                    MainMenuCommand.Set.AddNewidFromAdminEventsDataGrid(selectedCell.Value.ToString());
+                }
+
+            }
+            
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Events.UpdateData(comboBox4.SelectedValue.ToString(), textBox1.Text, dateTimePicker1.Value.ToString(), maskedTextBox1.Text, "от " + maskedTextBox2.Text + " рублей");
+            UpdateDataGrid3();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Events.CreateNew(comboBox4.SelectedValue.ToString(), textBox1.Text, dateTimePicker1.Value.ToString(), maskedTextBox1.Text, "от " + maskedTextBox2.Text + " рублей");
+            UpdateDataGrid3();
+        }
+
+
+        #endregion
+
+
+        #region Page-4
+        private void dataGridView4_SelectionChanged(object sender, EventArgs e)
+        {
+
+            if (dataGridView4.SelectedCells.Count > 0)
+            {
+                int rowIndex = dataGridView4.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = dataGridView4.Rows[rowIndex].Cells[0];
+
+                // Проверяем, что значение ячейки не равно null
+                if (selectedCell.Value != null)
+                {
+                    MainMenuCommand.Set.AddNewidFromAdminPlaceTypeDataGrid(selectedCell.Value.ToString());
+                }
+
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.PlaceType.DeleteFromId();
+            UpdateDataGrid4();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.PlaceType.UpdateData(textBox3.Text, textBox4.Text, maskedTextBox3.Text);
+            UpdateDataGrid4();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.PlaceType.CreateNew(textBox3.Text, textBox4.Text, maskedTextBox3.Text);
+            UpdateDataGrid4();
+        }
+
+
+        #endregion
+
+
+        #region Page-5
+        private void button13_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Hall.DeleteFromId();
+            UpdateDataGrid5();
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Hall.UpdateData(textBox6.Text, textBox5.Text);
+            UpdateDataGrid5();
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            MainMenuCommand.Set.Hall.CreateNew(textBox6.Text, textBox5.Text);
+            UpdateDataGrid5();
+        }
+
+        private void dataGridView5_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridView5.SelectedCells.Count > 0)
+            {
+                int rowIndex = dataGridView5.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = dataGridView5.Rows[rowIndex].Cells[0];
+
+                // Проверяем, что значение ячейки не равно null
+                if (selectedCell.Value != null)
+                {
+                    MainMenuCommand.Set.AddNewidFromAdminHallDataGrid(selectedCell.Value.ToString());
+                }
+
+            }
+        }
+        #endregion 
+
+        public static void ExportTicketsToExcel(int selectedEventId)
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(Settings.SQLConnected.GetSQLConnect()))
+                {
+                    connection.Open();
+
+                    // SQL-запрос для получения данных о купленных билетах для выбранного мероприятия
+                    string query = "SELECT * FROM V_Tickets WHERE id_Event = @selectedEventId AND Sales = 1";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@selectedEventId", selectedEventId);
+
+                        using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                        {
+                            DataTable dataTable = new DataTable();
+                            adapter.Fill(dataTable);
+
+                            // Создание нового ExcelPackage
+                            using (ExcelPackage excelPackage = new ExcelPackage())
+                            {
+                                // Добавление листа в ExcelPackage
+                                ExcelWorksheet worksheet = excelPackage.Workbook.Worksheets.Add("Tickets");
+
+                                // Заполнение листа данными из DataTable
+                                worksheet.Cells.LoadFromDataTable(dataTable, true);
+
+                                // Сохранение файла Excel
+                                string fileName = $"TicketReport_Event_{selectedEventId}.xlsx";
+                                excelPackage.SaveAs(new System.IO.FileInfo(fileName));
+
+                                MessageBox.Show($"Отчет сохранен в файл: {fileName}", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Произошла ошибка: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void buttonExportToExcel_Click(object sender, EventArgs e)
+        {
+            if (comboBox2.SelectedValue != null && int.TryParse(comboBox2.SelectedValue.ToString(), out int selectedEventId))
+            {
+                ExportTicketsToExcel(selectedEventId);
+            }
+            else
+            {
+                MessageBox.Show("Выберите мероприятие из списка", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
     }
 }

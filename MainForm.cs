@@ -83,12 +83,8 @@ namespace DvorecKulturi
                 if (selectedCell.Value.ToString() != null)
                 {
                     MainMenuCommand.Set.AddNewidFromUserEventDataGrid(selectedCell.Value.ToString());
-                    if (MainMenuCommand.Get.CheckidFromUserEventDataGrid())
-                    {
-                        tabControl1.SelectTab(tabPage2);
-                        LoadDataByEventId();
-
-                    }
+                    tabControl1.SelectTab(tabPage2);
+                    LoadDataByEventId();
                 }
                 else
                 {
