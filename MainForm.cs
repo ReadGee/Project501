@@ -149,6 +149,26 @@ namespace DvorecKulturi
             }
         }
 
+        private void UserTicketDataGrid_SelectionChanged(object sender, EventArgs e)
+        {
+            if (UserTickets_datagrid.SelectedCells.Count > 0)
+            {
+                int rowIndex = UserTickets_datagrid.SelectedCells[0].RowIndex;
+                DataGridViewCell selectedCell = UserTickets_datagrid.Rows[rowIndex].Cells[3];
+
+                // Проверяем, что значение ячейки не равно null
+                if (selectedCell.Value != null)
+                {
+                    LabelForSumma_text.Text = $"Сумма к оплате: {selectedCell.Value:C}";
+                }
+                else
+                {
+                    //LabelForSumma_text.Text = $"Сумма к оплате: {0.00} {0:C}";
+                }
+
+            }
+        }
+
 
 
         #endregion
@@ -169,12 +189,8 @@ namespace DvorecKulturi
             }
             else if (result == DialogResult.No)
             {
-                // Действия при отмене
+                
             }
-
-
-            /*AdminForm adminForm = new AdminForm();
-            adminForm.Show();*/
         }
     }
 }

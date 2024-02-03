@@ -36,6 +36,7 @@
             this.Search_textbox = new System.Windows.Forms.TextBox();
             this.UserEvent_dataGrid = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.button3 = new System.Windows.Forms.Button();
             this.BuyTickets_btn = new System.Windows.Forms.Button();
             this.LabelForSumma_text = new System.Windows.Forms.Label();
             this.Phone_textbox = new System.Windows.Forms.MaskedTextBox();
@@ -44,11 +45,10 @@
             this.FioOnNew_textbox = new System.Windows.Forms.TextBox();
             this.UserTickets_datagrid = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.button2 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.LogoText = new System.Windows.Forms.Label();
             this.SingIn_btn = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.UserEvent_dataGrid)).BeginInit();
@@ -64,7 +64,7 @@
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
             this.tabControl1.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.tabControl1.ItemSize = new System.Drawing.Size(10, 10);
+            this.tabControl1.ItemSize = new System.Drawing.Size(0, 1);
             this.tabControl1.Location = new System.Drawing.Point(12, 41);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
@@ -80,10 +80,10 @@
             this.tabPage1.Controls.Add(this.Search_btn);
             this.tabPage1.Controls.Add(this.Search_textbox);
             this.tabPage1.Controls.Add(this.UserEvent_dataGrid);
-            this.tabPage1.Location = new System.Drawing.Point(4, 14);
+            this.tabPage1.Location = new System.Drawing.Point(4, 13);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1089, 576);
+            this.tabPage1.Size = new System.Drawing.Size(1089, 577);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             // 
@@ -149,13 +149,24 @@
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.FioOnNew_textbox);
             this.tabPage2.Controls.Add(this.UserTickets_datagrid);
-            this.tabPage2.Location = new System.Drawing.Point(4, 14);
+            this.tabPage2.Location = new System.Drawing.Point(4, 5);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1089, 576);
+            this.tabPage2.Size = new System.Drawing.Size(1089, 585);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button3.Location = new System.Drawing.Point(6, 3);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 8;
+            this.button3.Text = "Назад";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.label3_Click);
             // 
             // BuyTickets_btn
             // 
@@ -221,6 +232,7 @@
             this.UserTickets_datagrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.UserTickets_datagrid.Size = new System.Drawing.Size(742, 530);
             this.UserTickets_datagrid.TabIndex = 0;
+            this.UserTickets_datagrid.SelectionChanged += new System.EventHandler(this.UserTicketDataGrid_SelectionChanged);
             // 
             // tabPage3
             // 
@@ -233,6 +245,17 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "tabPage3";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button2.Location = new System.Drawing.Point(6, 6);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 3;
+            this.button2.Text = "Назад";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
             // 
@@ -264,28 +287,6 @@
             this.SingIn_btn.Text = "Вход";
             this.SingIn_btn.UseVisualStyleBackColor = true;
             this.SingIn_btn.Click += new System.EventHandler(this.SingIn_btn_Click);
-            // 
-            // button2
-            // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button2.Location = new System.Drawing.Point(6, 6);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "Назад";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.label3_Click);
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button3.Location = new System.Drawing.Point(6, 3);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 8;
-            this.button3.Text = "Назад";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.label3_Click);
             // 
             // MainForm
             // 
